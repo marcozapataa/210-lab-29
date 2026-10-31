@@ -1,0 +1,100 @@
+P001,New York City,Healthy
+P002,New York City,Healthy
+P003,New York City,Healthy
+P004,New York City,Healthy
+P005,New York City,Infected
+P006,New York City,Healthy
+P007,New York City,Healthy
+P008,New York City,Healthy
+P009,New York City,Healthy
+P010,New York City,Healthy
+P011,New York City,Healthy
+P012,New York City,Healthy
+P013,New York City,Healthy
+P014,New York City,Healthy
+P015,New York City,Infected
+P016,New York City,Healthy
+P017,New York City,Healthy
+P018,New York City,Healthy
+P019,New York City,Healthy
+P020,New York City,Healthy
+P021,Los Angeles,Healthy
+P022,Los Angeles,Healthy
+P023,Los Angeles,Healthy
+P024,Los Angeles,Healthy
+P025,Los Angeles,Infected
+P026,Los Angeles,Healthy
+P027,Los Angeles,Healthy
+P028,Los Angeles,Healthy
+P029,Los Angeles,Healthy
+P030,Los Angeles,Healthy
+P031,Los Angeles,Healthy
+P032,Los Angeles,Healthy
+P033,Los Angeles,Healthy
+P034,Los Angeles,Healthy
+P035,Los Angeles,Infected
+P036,Los Angeles,Healthy
+P037,Los Angeles,Healthy
+P038,Los Angeles,Healthy
+P039,Los Angeles,Healthy
+P040,Los Angeles,Healthy
+P041,Chicago,Healthy
+P042,Chicago,Healthy
+P043,Chicago,Healthy
+P044,Chicago,Healthy
+P045,Chicago,Infected
+P046,Chicago,Healthy
+P047,Chicago,Healthy
+P048,Chicago,Healthy
+P049,Chicago,Healthy
+P050,Chicago,Healthy
+P051,Chicago,Healthy
+P052,Chicago,Healthy
+P053,Chicago,Healthy
+P054,Chicago,Healthy
+P055,Chicago,Infected
+P056,Chicago,Healthy
+P057,Chicago,Healthy
+P058,Chicago,Healthy
+P059,Chicago,Healthy
+P060,Chicago,Healthy
+P061,Houston,Healthy
+P062,Houston,Healthy
+P063,Houston,Healthy
+P064,Houston,Healthy
+P065,Houston,Infected
+P066,Houston,Healthy
+P067,Houston,Healthy
+P068,Houston,Healthy
+P069,Houston,Healthy
+P070,Houston,Healthy
+P071,Houston,Healthy
+P072,Houston,Healthy
+P073,Houston,Healthy
+P074,Houston,Healthy
+P075,Houston,Infected
+P076,Houston,Healthy
+P077,Houston,Healthy
+P078,Houston,Healthy
+P079,Houston,Healthy
+P080,Houston,Healthy
+P081,Phoenix,Healthy
+P082,Phoenix,Healthy
+P083,Phoenix,Healthy
+P084,Phoenix,Healthy
+P085,Phoenix,Infected
+P086,Phoenix,Healthy
+P087,Phoenix,Healthy
+P088,Phoenix,Healthy
+P089,Phoenix,Healthy
+P090,Phoenix,Healthy
+P091,Phoenix,Healthy
+P092,Phoenix,Healthy
+P093,Phoenix,Healthy
+P094,Phoenix,Healthy
+P095,Phoenix,Infected
+P096,Phoenix,Healthy
+P097,Phoenix,Healthy
+P098,Phoenix,Healthy
+P099,Phoenix,Healthy
+P100,Phoenix,Healthy
