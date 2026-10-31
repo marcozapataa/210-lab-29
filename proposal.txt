@@ -1,0 +1,15 @@
+# Project CONTAGION
+**Emerging Pathogen Research Institute (EPRI)**
+
+Project CONTAGION is a simulation developed by the fictional Emerging Pathogen Research Institute (EPRI) 
+to monitor the spread of a fictional pathogen, NV-26, across five U.S. cities over a 30-day period.
+
+The simulation will use a map<string, array<list<string>, 3>> to organize individuals by city and health status. 
+Each city will contain three lists representing healthy, infected, and recovered individuals. 
+The program will read at least 100 individual records from an external file named population.txt.
+
+Each day, healthy individuals will have a probability of becoming infected based on the city's infected population, 
+while infected individuals will have a probability of recovering. Recovered individuals will remain immune for the remainder of the simulation.
+
+The program will display the initial population statistics, track changes in each city's healthy, infected, 
+and recovered populations over 30 days, and generate a final summary comparing the outbreak's progression across the five cities.
