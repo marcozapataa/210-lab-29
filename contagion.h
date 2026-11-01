@@ -18,3 +18,4 @@ bool load_pop(PopulationMap& population);
 void simulate_infections(PopulationMap& population);
 void simulate_recoveries(PopulationMap& population);
 void display_stats(const PopulationMap& population, int day);
+void display_summary(const PopulationMap& population);

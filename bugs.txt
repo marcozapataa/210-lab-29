@@ -1,0 +1,184 @@
+Bug #1: Incorrect maximum infection statistics
+
+Problem:
+The final outbreak summary displayed an empty city name
+and -1 for the highest number of active infections.
+
+Cause:
+The comparison that updates maxInfected and mostInfectedCity
+was missing from the display_summary() function.
+
+Correction:
+Added an if statement inside the city loop to compare
+infection counts and update both tracking variables.
+
+Testing:
+Recompiled and ran the simulation. Verified that the
+summary correctly identifies the city with the most
+active infections.
+
+Bug #2: Empty population file accepted
+
+Problem:
+The simulation continued running even when population.txt
+contained no records.
+
+Cause:
+load_pop() checked whether the file opened successfully
+but did not check whether any population data was loaded.
+
+Correction:
+Added a population.empty() check that returns false
+when no population records are present.
+
+Testing:
+Verified that an empty population file produces an error
+and prevents the simulation from starting.
+
+Bug #3: Invalid health status ignored
+
+Problem:
+The simulation accepted a record with an invalid health
+status and continued with only 99 individuals.
+
+Cause:
+load_pop() did not handle unrecognized health statuses.
+
+Correction:
+Added an else statement to display an error and return
+false when an invalid status is encountered.
+
+Testing:
+Verified that an invalid status stops the simulation.
+Restored the original data and confirmed all 100
+individuals were loaded successfully.
+
+Bug #4: Duplicate individual IDs accepted
+
+Problem:
+The simulation counted 101 individuals after a duplicate
+record was added to population.txt.
+
+Cause:
+load_pop() did not check whether an individual ID
+had already been loaded.
+
+Correction:
+Added a set<string> to track individual IDs and
+reject duplicate records.
+
+Testing:
+Verified that duplicate ID P001 produces an error.
+Removed the duplicate record and confirmed the
+simulation loads all 100 individuals successfully.
+Bug #5: Missing city name accepted
+
+Problem:
+The simulation accepted an individual without a city name
+and created a population entry with an empty city key.
+
+Cause:
+load_pop() did not validate the city field before inserting
+individuals into the population map.
+
+Correction:
+Added a city.empty() check that reports an error and
+returns false when a city name is missing.
+
+Testing:
+Verified that a missing city produces an error.
+Restored the original data and confirmed all 100
+individuals load successfully.
+
+Bug #6: Missing individual ID accepted
+
+Problem:
+The simulation accepted a population record with an
+empty individual ID.
+
+Cause:
+load_pop() checked for duplicate IDs but did not
+verify that the ID field contained a value.
+
+Correction:
+Added an id.empty() check that reports an error
+and returns false when an individual ID is missing.
+
+Testing:
+Verified that an empty ID produces an error.
+Restored the original record and confirmed all
+100 individuals load successfully.
+
+Bug #7: Whitespace-only city names accepted
+
+Problem:
+The program accepted city names containing only spaces.
+
+Cause:
+The city.empty() check detected empty strings but
+not strings containing whitespace.
+
+Correction:
+Replaced city.empty() with find_first_not_of()
+to reject empty or whitespace-only city names.
+
+Testing:
+Verified that a whitespace-only city was rejected.
+Restored the original population data and confirmed
+the simulation loaded all 100 individuals.
+
+Bug #8: Whitespace-only individual IDs accepted
+
+Problem:
+The program accepted individual IDs containing only whitespace.
+
+Cause:
+The id.empty() check only detected strings with zero characters.
+
+Correction:
+Replaced id.empty() with find_first_not_of() to reject
+empty or whitespace-only individual IDs.
+
+Testing:
+Verified that a whitespace-only ID was rejected.
+Restored the original population data and confirmed
+the simulation ran successfully.
+
+Bug #9: Population files containing fewer than 100 individuals accepted
+
+Problem:
+The program allowed simulations with fewer than 100 individuals.
+
+Cause:
+load_pop() checked whether the population was empty but
+did not enforce the minimum population requirement.
+
+Correction:
+Added a validation using seenIDs.size() to reject
+population files containing fewer than 100 individuals.
+
+Testing:
+Verified that a file containing only two individuals was rejected.
+Restored the original 100-person population and confirmed
+the simulation ran successfully.
+
+Bug #10: Simulation accepted fewer than five cities
+
+Problem:
+The program allowed simulations with fewer than five cities,
+even though the project requires five cities.
+
+Cause:
+load_pop() validated the number of individuals but did not
+check the number of cities in the population map.
+
+Correction:
+Added a validation using population.size() to require
+exactly five cities.
+
+Testing:
+Changed all Phoenix records to Houston, leaving 100 individuals
+distributed across four cities. Verified that the program
+rejected the file after the correction.
+Restored the original population data and confirmed
+the simulation ran successfully.

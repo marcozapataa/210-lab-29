@@ -37,6 +37,8 @@ int main() {
 
     }
 
+    display_summary(population);
+
     cout << "\nSimulation complete!\n";
 
     return 0;

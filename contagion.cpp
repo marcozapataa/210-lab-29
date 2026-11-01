@@ -4,6 +4,8 @@
 #include <sstream>
 #include <cstdlib>
 #include <iterator>
+#include <iomanip>
+#include <set>
 using namespace std;
 
 // Load population data from population.txt
@@ -18,6 +20,8 @@ bool load_pop(PopulationMap& population) {
 
     string line;
 
+    set<string> seenIDs;
+
     while (getline(file, line)) {
 
         stringstream ss(line);
@@ -28,6 +32,21 @@ bool load_pop(PopulationMap& population) {
         getline(ss, city, ',');
         getline(ss, status);
 
+        if (id.find_first_not_of(" \t\r\n") == string::npos) {
+            cout << "Error: Missing or invalid individual ID." << endl;
+            return false;
+        }
+
+        if (city.find_first_not_of(" \t\r\n") == string::npos) {
+            cout << "Error: Missing or invalid city for ID " << id << endl;
+            return false;
+        }
+
+        if (seenIDs.find(id) != seenIDs.end()) {
+            cout << "\nError: Duplicate individual ID " << id << endl;
+            return false;
+        }
+
         if (status == "Healthy") {
             population[city][0].push_back(id);
         }
@@ -37,8 +56,29 @@ bool load_pop(PopulationMap& population) {
         else if (status == "Recovered") {
             population[city][2].push_back(id);
         }
+        else {
+            cout << "\nInvalid health status for ID " << id << endl;
+            cout << endl;
+            return false;
+        }
+
+        seenIDs.insert(id);
     }
 
+    if (population.empty()) {
+        cout << "\nPopulation file is empty.\n" << endl;
+        return false;
+    }
+
+    if (population.size() != 5) {
+        cout << "Error: Population must contain exactly five cities." << endl;
+        return false;
+    }
+
+     if (seenIDs.size() < 100) {
+        cout << "Error: Population must contain at least 100 individuals." << endl;
+        return false;
+    }
     file.close();
     return true;
 }
@@ -141,4 +181,57 @@ void simulate_recoveries(PopulationMap& population) {
     }
 
 
+}
+
+void display_summary(const PopulationMap& population) {
+    cout << "\n=========== FINAL OUTBREAK SUMMARY ==============\n";
+
+    cout << left << setw(20) << "City"
+         << right << setw(10) << "Healthy"
+         << setw(12) << "Infected"
+         << setw(12) << "Recovered" << endl;
+
+    cout << string(54, '-') << endl;
+
+
+    // Track cities with the most infections and recoveries
+    string mostInfectedCity;
+    string mostRecoveredCity;
+
+    int maxInfected = -1;
+    int maxRecovered = -1;
+
+    // Calculate and display each city
+    for (const auto& city : population) {
+        int healthy = city.second[0].size();
+        int infected = city.second[1].size();
+        int recovered = city.second[2].size();
+
+        // find city with most infections
+        if (infected > maxInfected) {
+            maxInfected = infected;
+            mostInfectedCity = city.first;
+        }
+
+        // find city with the most recoveries
+        if (recovered > maxRecovered) {
+            maxRecovered = recovered;
+            mostRecoveredCity = city.first;
+        }
+
+        cout << left << setw(20) << city.first
+             << right << setw(10) << healthy
+             << setw(12) << infected
+             << setw(12) << recovered << endl;
+    }
+
+    cout << string(54, '-') << endl;
+
+    if (!population.empty()) {
+        cout << "Most active infections: " << mostInfectedCity
+             << " (" << maxInfected << ")" << endl;
+
+        cout << "Most recoveries: " << mostRecoveredCity
+             << " (" << maxRecovered << ")" << endl;
+    }
 }
