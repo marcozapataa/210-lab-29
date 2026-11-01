@@ -71,3 +71,21 @@ Testing:
 Verified that duplicate ID P001 produces an error.
 Removed the duplicate record and confirmed the
 simulation loads all 100 individuals successfully.
+Bug #5: Missing city name accepted
+
+Problem:
+The simulation accepted an individual without a city name
+and created a population entry with an empty city key.
+
+Cause:
+load_pop() did not validate the city field before inserting
+individuals into the population map.
+
+Correction:
+Added a city.empty() check that reports an error and
+returns false when a city name is missing.
+
+Testing:
+Verified that a missing city produces an error.
+Restored the original data and confirmed all 100
+individuals load successfully.
