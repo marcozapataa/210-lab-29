@@ -4,6 +4,7 @@
 #include <sstream>
 #include <cstdlib>
 #include <iterator>
+#include <iomanip>
 using namespace std;
 
 // Load population data from population.txt
@@ -141,4 +142,17 @@ void simulate_recoveries(PopulationMap& population) {
     }
 
 
+}
+
+void display_summary(const PopulationMap& population) {
+    cout << "\n=========== FINAL OUTBREAK SUMMARY ==============\n";
+
+    cout << left << setw(20) << "City"
+         << right << setw(10) << "Healthy"
+         << setw(12) << "Infected"
+         << setw(12) << "Recovered" << endl;
+
+    cout << string(54, '-') << endl;
+
+    // Calculate and display each city
 }
