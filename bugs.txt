@@ -126,3 +126,20 @@ Testing:
 Verified that a whitespace-only city was rejected.
 Restored the original population data and confirmed
 the simulation loaded all 100 individuals.
+
+Bug #8: Whitespace-only individual IDs accepted
+
+Problem:
+The program accepted individual IDs containing only whitespace.
+
+Cause:
+The id.empty() check only detected strings with zero characters.
+
+Correction:
+Replaced id.empty() with find_first_not_of() to reject
+empty or whitespace-only individual IDs.
+
+Testing:
+Verified that a whitespace-only ID was rejected.
+Restored the original population data and confirmed
+the simulation ran successfully.

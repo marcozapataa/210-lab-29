@@ -32,8 +32,8 @@ bool load_pop(PopulationMap& population) {
         getline(ss, city, ',');
         getline(ss, status);
 
-        if (id.empty()) {
-            cout << "Error: Missing individual ID." << endl;
+        if (id.find_first_not_of(" \t\r\n") == string::npos) {
+            cout << "Error: Missing or invalid individual ID." << endl;
             return false;
         }
 
