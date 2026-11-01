@@ -161,3 +161,24 @@ Testing:
 Verified that a file containing only two individuals was rejected.
 Restored the original 100-person population and confirmed
 the simulation ran successfully.
+
+Bug #10: Simulation accepted fewer than five cities
+
+Problem:
+The program allowed simulations with fewer than five cities,
+even though the project requires five cities.
+
+Cause:
+load_pop() validated the number of individuals but did not
+check the number of cities in the population map.
+
+Correction:
+Added a validation using population.size() to require
+exactly five cities.
+
+Testing:
+Changed all Phoenix records to Houston, leaving 100 individuals
+distributed across four cities. Verified that the program
+rejected the file after the correction.
+Restored the original population data and confirmed
+the simulation ran successfully.

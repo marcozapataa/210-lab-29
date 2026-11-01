@@ -70,6 +70,11 @@ bool load_pop(PopulationMap& population) {
         return false;
     }
 
+    if (population.size() != 5) {
+        cout << "Error: Population must contain exactly five cities." << endl;
+        return false;
+    }
+
      if (seenIDs.size() < 100) {
         cout << "Error: Population must contain at least 100 individuals." << endl;
         return false;
