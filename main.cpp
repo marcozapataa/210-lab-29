@@ -1,11 +1,16 @@
 #include <iostream>
 #include "contagion.h"
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 // Project CONTAGION
 // NV-26 Outbreak Simulation
 
 int main() {
+
+    srand(static_cast<unsigned int>(time(nullptr)));
+
     PopulationMap population;
 
     cout << "Project CONTAGION - NV-26 Simulation\n";
@@ -19,7 +24,20 @@ int main() {
     // Display initial population (Day 0)
     display_stats(population, 0);
 
-    cout << "\nPopulation loading complete.\n";
+    for (int day = 1; day <= DAYS; day++) {
+
+        // Process recoveries before infections
+        simulate_recoveries(population);
+
+        // Process new infections
+        simulate_infections(population);
+
+        // Display daily stats
+        display_stats(population, day);
+
+    }
+
+    cout << "\nSimulation complete!\n";
 
     return 0;
 }

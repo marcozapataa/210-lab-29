@@ -69,10 +69,76 @@ void display_stats(const PopulationMap& population, int day) {
 
     cout << "---------------------------------" << endl;
 
-    cout << "Total Healthy: " << totalHealthy << endl;
-    cout << "Total Infected: " << totalInfected << endl;
-    cout << "Total Recovered: " << totalRecovered << endl;
+    cout << "Total Healthy: " << totalHealthy << " "
+         << "Total Infected: " << totalInfected << " "
+         << "Total Recovered: " << totalRecovered << endl;
     cout << "Total Population: "
          << totalHealthy + totalInfected + totalRecovered
          << endl;
+    cout << endl;
+}
+
+void simulate_infections(PopulationMap& population) {
+
+    for (auto& city : population) {
+
+        int total = city.second[0].size()
+                  + city.second[1].size()
+                  + city.second[2].size();
+        
+        if (total == 0) {
+            continue;
+        }
+
+        int infected = city.second[1].size();
+
+        double infectionProbability =
+            INFECTION_RATE * static_cast<double>(infected) / total;
+
+        auto it = city.second[0].begin();
+
+        while (it != city.second[0].end()) {
+
+            double randomNum = static_cast<double>(rand()) / RAND_MAX;
+
+            auto nextIt = next(it);
+
+            if (randomNum < infectionProbability) {
+
+                city.second[1].splice(
+                    city.second[1].end(),
+                    city.second[0], it
+                );
+            }
+
+            it = nextIt;
+        }
+    }
+}
+
+void simulate_recoveries(PopulationMap& population) {
+
+    for (auto& city : population) {
+
+        auto it = city.second[1].begin();
+
+        while (it != city.second[1].end()) {
+
+            double randomNum = static_cast<double>(rand()) / RAND_MAX;
+
+            auto nextIt = next(it);
+
+            if (randomNum < RECOVERY_RATE) {
+
+                city.second[2].splice(
+                    city.second[2].end(),
+                    city.second[1], it
+                );
+            }
+
+            it = nextIt;
+        }
+    }
+
+
 }
