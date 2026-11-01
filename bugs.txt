@@ -89,3 +89,22 @@ Testing:
 Verified that a missing city produces an error.
 Restored the original data and confirmed all 100
 individuals load successfully.
+
+Bug #6: Missing individual ID accepted
+
+Problem:
+The simulation accepted a population record with an
+empty individual ID.
+
+Cause:
+load_pop() checked for duplicate IDs but did not
+verify that the ID field contained a value.
+
+Correction:
+Added an id.empty() check that reports an error
+and returns false when an individual ID is missing.
+
+Testing:
+Verified that an empty ID produces an error.
+Restored the original record and confirmed all
+100 individuals load successfully.

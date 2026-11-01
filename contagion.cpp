@@ -32,6 +32,11 @@ bool load_pop(PopulationMap& population) {
         getline(ss, city, ',');
         getline(ss, status);
 
+        if (id.empty()) {
+            cout << "Error: Missing individual ID." << endl;
+            return false;
+        }
+
         if (city.empty()) {
             cout << "Error: Missing city for ID " << id << endl;
             return false;
