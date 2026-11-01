@@ -69,6 +69,11 @@ bool load_pop(PopulationMap& population) {
         cout << "\nPopulation file is empty.\n" << endl;
         return false;
     }
+
+     if (seenIDs.size() < 100) {
+        cout << "Error: Population must contain at least 100 individuals." << endl;
+        return false;
+    }
     file.close();
     return true;
 }
