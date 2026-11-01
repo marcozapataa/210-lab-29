@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <iterator>
 #include <iomanip>
+#include <set>
 using namespace std;
 
 // Load population data from population.txt
@@ -19,6 +20,8 @@ bool load_pop(PopulationMap& population) {
 
     string line;
 
+    set<string> seenIDs;
+
     while (getline(file, line)) {
 
         stringstream ss(line);
@@ -29,6 +32,11 @@ bool load_pop(PopulationMap& population) {
         getline(ss, city, ',');
         getline(ss, status);
 
+        if (seenIDs.find(id) != seenIDs.end()) {
+            cout << "\nError: Duplicate individual ID " << id << endl;
+            return false;
+        }
+
         if (status == "Healthy") {
             population[city][0].push_back(id);
         }
@@ -38,6 +46,13 @@ bool load_pop(PopulationMap& population) {
         else if (status == "Recovered") {
             population[city][2].push_back(id);
         }
+        else {
+            cout << "\nInvalid health status for ID " << id << endl;
+            cout << endl;
+            return false;
+        }
+
+        seenIDs.insert(id);
     }
 
     if (population.empty()) {

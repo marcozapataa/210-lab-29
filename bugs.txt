@@ -34,3 +34,40 @@ when no population records are present.
 Testing:
 Verified that an empty population file produces an error
 and prevents the simulation from starting.
+
+Bug #3: Invalid health status ignored
+
+Problem:
+The simulation accepted a record with an invalid health
+status and continued with only 99 individuals.
+
+Cause:
+load_pop() did not handle unrecognized health statuses.
+
+Correction:
+Added an else statement to display an error and return
+false when an invalid status is encountered.
+
+Testing:
+Verified that an invalid status stops the simulation.
+Restored the original data and confirmed all 100
+individuals were loaded successfully.
+
+Bug #4: Duplicate individual IDs accepted
+
+Problem:
+The simulation counted 101 individuals after a duplicate
+record was added to population.txt.
+
+Cause:
+load_pop() did not check whether an individual ID
+had already been loaded.
+
+Correction:
+Added a set<string> to track individual IDs and
+reject duplicate records.
+
+Testing:
+Verified that duplicate ID P001 produces an error.
+Removed the duplicate record and confirmed the
+simulation loads all 100 individuals successfully.
