@@ -108,3 +108,21 @@ Testing:
 Verified that an empty ID produces an error.
 Restored the original record and confirmed all
 100 individuals load successfully.
+
+Bug #7: Whitespace-only city names accepted
+
+Problem:
+The program accepted city names containing only spaces.
+
+Cause:
+The city.empty() check detected empty strings but
+not strings containing whitespace.
+
+Correction:
+Replaced city.empty() with find_first_not_of()
+to reject empty or whitespace-only city names.
+
+Testing:
+Verified that a whitespace-only city was rejected.
+Restored the original population data and confirmed
+the simulation loaded all 100 individuals.

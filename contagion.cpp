@@ -37,8 +37,8 @@ bool load_pop(PopulationMap& population) {
             return false;
         }
 
-        if (city.empty()) {
-            cout << "Error: Missing city for ID " << id << endl;
+        if (city.find_first_not_of(" \t\r\n") == string::npos) {
+            cout << "Error: Missing or invalid city for ID " << id << endl;
             return false;
         }
 
