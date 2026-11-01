@@ -1,0 +1,138 @@
+Project CONTAGION - Unit Testing Plan  
+Lab 30 - Alpha Development
+
+Purpose:
+
+Verify that the population loading, infection simulation, and recovery simulation functions behave correctly using unit tests.
+
+Test 1: Population File Loading
+
+Function: load_pop()
+
+Input:
+population.txt containing 100 individuals distributed across five cities.
+
+Expected Results:
+- The function returns true.
+- Exactly five cities are loaded.
+- Each city contains 18 healthy individuals.
+- Each city contains 2 infected individuals.
+- Each city contains 0 recovered individuals.
+
+Pass Criteria:
+All population counts match the expected values.
+
+Result: PASSED
+
+
+Test 2: Infection Simulation
+
+Function: simulate_infections()
+
+Input:
+A population containing healthy and infected individuals.
+
+Expected Results:
+- Healthy population decreases or remains unchanged.
+- Infected population increases or remains unchanged.
+- Recovered population remains unchanged.
+- Total population remains constant.
+
+Pass Criteria:
+All population changes follow the expected rules.
+
+Result: PASSED
+
+
+Test 3: Recovery Simulation
+
+Function: simulate_recoveries()
+
+Input:
+A population containing infected individuals.
+
+Expected Results:
+- Healthy population remains unchanged.
+- Infected population decreases or remains unchanged.
+- Recovered population increases or remains unchanged.
+- Total population remains constant.
+
+Pass Criteria:
+All population changes follow the expected rules.
+
+Result: PASSED
+
+Unit Test Driver code:
+
+#include <iostream>
+#include <cassert>
+#include <cstdlib>
+#include "contagion.h"
+
+using namespace std;
+
+int main() {
+
+    cout << "Project CONTAGION - Unit Tests\n\n";
+
+    PopulationMap population;
+
+    // Test 1: Population loading
+    bool loaded = load_pop(population);
+    assert(loaded);
+    assert(population.size() == 5);
+
+    for (const auto& city : population) {
+        assert(city.second[0].size() == 18);
+        assert(city.second[1].size() == 2);
+        assert(city.second[2].size() == 0);
+    }
+
+    cout << "Test 1 passed: Population loaded correctly.\n";
+
+    // Test 2: Infection simulation
+    srand(42);
+
+    simulate_infections(population);
+
+    for (const auto& city : population) {
+        int healthy = city.second[0].size();
+        int infected = city.second[1].size();
+        int recovered = city.second[2].size();
+
+        assert(healthy <= 18);
+        assert(infected >= 2);
+        assert(recovered == 0);
+        assert(healthy + infected + recovered == 20);
+    }
+
+    cout << "Test 2 passed: Infection simulation works correctly.\n";
+
+    // Test 3: Recovery simulation
+    PopulationMap beforeRecovery = population;
+
+    simulate_recoveries(population);
+
+    for (const auto& city : population) {
+        const string& name = city.first;
+
+        int healthy = city.second[0].size();
+        int infected = city.second[1].size();
+        int recovered = city.second[2].size();
+
+        int previousHealthy = beforeRecovery[name][0].size();
+        int previousInfected = beforeRecovery[name][1].size();
+        int previousRecovered = beforeRecovery[name][2].size();
+
+        assert(healthy == previousHealthy);
+        assert(infected <= previousInfected);
+        assert(recovered >= previousRecovered);
+        assert(healthy + infected + recovered == 20);
+    }
+
+    cout << "Test 3 passed: Recovery simulation works correctly.\n";
+
+    cout << "\nAll unit tests passed!\n";
+
+    return 0;
+}
