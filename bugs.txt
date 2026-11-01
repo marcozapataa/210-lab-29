@@ -16,3 +16,21 @@ Testing:
 Recompiled and ran the simulation. Verified that the
 summary correctly identifies the city with the most
 active infections.
+
+Bug #2: Empty population file accepted
+
+Problem:
+The simulation continued running even when population.txt
+contained no records.
+
+Cause:
+load_pop() checked whether the file opened successfully
+but did not check whether any population data was loaded.
+
+Correction:
+Added a population.empty() check that returns false
+when no population records are present.
+
+Testing:
+Verified that an empty population file produces an error
+and prevents the simulation from starting.

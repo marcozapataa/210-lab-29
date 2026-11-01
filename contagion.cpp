@@ -40,6 +40,10 @@ bool load_pop(PopulationMap& population) {
         }
     }
 
+    if (population.empty()) {
+        cout << "\nPopulation file is empty.\n" << endl;
+        return false;
+    }
     file.close();
     return true;
 }
