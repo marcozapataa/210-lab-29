@@ -154,5 +154,45 @@ void display_summary(const PopulationMap& population) {
 
     cout << string(54, '-') << endl;
 
+
+    // Track cities with the most infections and recoveries
+    string mostInfectedCity;
+    string mostRecoveredCity;
+
+    int maxInfected = -1;
+    int maxRecovered = -1;
+
     // Calculate and display each city
+    for (const auto& city : population) {
+        int healthy = city.second[0].size();
+        int infected = city.second[1].size();
+        int recovered = city.second[2].size();
+
+        // find city with most infections
+        if (infected > maxInfected) {
+            maxInfected = infected;
+            mostInfectedCity = city.first;
+        }
+
+        // find city with the most recoveries
+        if (recovered > maxRecovered) {
+            maxRecovered = recovered;
+            mostRecoveredCity = city.first;
+        }
+
+        cout << left << setw(20) << city.first
+             << right << setw(10) << healthy
+             << setw(12) << infected
+             << setw(12) << recovered << endl;
+    }
+
+    cout << string(54, '-') << endl;
+
+    if (!population.empty()) {
+        cout << "Most active infections: " << mostInfectedCity
+             << " (" << maxInfected << ")" << endl;
+
+        cout << "Most recoveries: " << mostRecoveredCity
+             << " (" << maxRecovered << ")" << endl;
+    }
 }

@@ -1,0 +1,18 @@
+Bug #1: Incorrect maximum infection statistics
+
+Problem:
+The final outbreak summary displayed an empty city name
+and -1 for the highest number of active infections.
+
+Cause:
+The comparison that updates maxInfected and mostInfectedCity
+was missing from the display_summary() function.
+
+Correction:
+Added an if statement inside the city loop to compare
+infection counts and update both tracking variables.
+
+Testing:
+Recompiled and ran the simulation. Verified that the
+summary correctly identifies the city with the most
+active infections.
